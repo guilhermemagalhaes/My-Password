@@ -7,7 +7,12 @@ namespace MyPassword.Repository.Contract
 {
     public interface ISenhasRepository
     {
-        IList<Senha> Get();
-        void Post(Senha senha);        
+        IList<Senha> GetAll();
+
+        Senha GetById(int SenhaId);
+
+        int InsertOrUpdate(Senha senha);
+
+        void Delete(int SenhaId);
     }
 }

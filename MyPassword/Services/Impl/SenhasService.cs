@@ -17,14 +17,24 @@ namespace MyPassword.Services.Impl
             _senhasRepository = senhasRepository;
         }
 
-        public void AdicionarSenha(Senha senha)
+        public int InsertOrUpdate(Senha senha)
         {
-            _senhasRepository.Post(senha);
+            return _senhasRepository.InsertOrUpdate(senha);
         }
 
-        public IList<Senha> GetSenhas()
+        public IList<Senha> GetAll()
         {
-            return _senhasRepository.Get();
+            return _senhasRepository.GetAll();
+        }
+
+        public Senha GetById(int SenhaId)
+        {
+            return _senhasRepository.GetById(SenhaId);
+        }
+
+        public void Delete(int SenhaId)
+        {
+            _senhasRepository.Delete(SenhaId);
         }
     }
 }

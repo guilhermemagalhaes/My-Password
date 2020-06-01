@@ -17,14 +17,24 @@ namespace MyPassword.Services.Impl
             _plataformaRepository = plataformaRepository;
         }
 
-        public void AdicionarPlataforma(Plataforma plataforma)
+        public int InsertOrUpdate(Plataforma plataforma)
         {
-            _plataformaRepository.Post(plataforma);
+            return _plataformaRepository.InsertOrUpdate(plataforma);
         }
 
-        public IList<Plataforma> GetPlataformas()
+        public Plataforma GetById(int PlataformaId)
         {
-            return _plataformaRepository.Get();
+            return _plataformaRepository.GetById(PlataformaId);
+        }
+
+        public IList<Plataforma> GetAll()
+        {
+            return _plataformaRepository.GetAll();
+        }
+
+        public void Delete(int PlataformaId)
+        {
+            _plataformaRepository.Delete(PlataformaId);
         }
     }
 }

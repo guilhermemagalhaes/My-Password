@@ -7,8 +7,12 @@ namespace MyPassword.Services.Contract
 {
     public interface IPlataformaService
     {
-        IList<Plataforma> GetPlataformas();
+        IList<Plataforma> GetAll();
 
-        void AdicionarPlataforma(Plataforma plataforma);
+        Plataforma GetById(int PlataformaId);
+
+        int InsertOrUpdate(Plataforma plataforma);
+
+        void Delete(int PlataformaId);
     }
 }

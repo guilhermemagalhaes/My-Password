@@ -7,8 +7,12 @@ namespace MyPassword.Repository.Contract
 {
     public interface IPlataformaRepository
     {
-        IList<Plataforma> Get();
+        IList<Plataforma> GetAll();
 
-        void Post(Plataforma plataforma);
+        Plataforma GetById(int PlataformaId);
+
+        int InsertOrUpdate(Plataforma plataforma);
+
+        void Delete(int PlataformaId);
     }
 }

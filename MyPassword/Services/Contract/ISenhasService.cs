@@ -5,9 +5,14 @@ using System.Text;
 
 namespace MyPassword.Services.Contract
 {
-    public interface ISenhasService 
+    public interface ISenhasService
     {
-        IList<Senha> GetSenhas();
-        void AdicionarSenha(Senha senha);
+        IList<Senha> GetAll();
+
+        Senha GetById(int SenhaId);
+
+        int InsertOrUpdate(Senha senha);
+
+        void Delete(int SenhaId);
     }
 }

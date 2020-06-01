@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MyPassword.Entity;
 using MyPassword.Services.Contract;
 
 namespace MyPassword.Presentation.Controllers
@@ -11,94 +12,56 @@ namespace MyPassword.Presentation.Controllers
     public class PlataformaController : BaseController
     {
         public readonly IPlataformaService _plataformaService;
+
         public PlataformaController(IPlataformaService plataformaService)
         {
-            _plataformaService = plataformaService;
+            _plataformaService = plataformaService;            
         }
 
 
         // GET: Plataforma
         public ActionResult Index()
         {
-            var item = _plataformaService.GetPlataformas();
+            var item = _plataformaService.GetAll();
             if (HttpExtensions.IsAjaxRequest(Request))
                 return PartialView(item);
             else
                 return View(item);
         }
 
-        // GET: Plataforma/Details/5
-        public ActionResult Details(int id)
+
+        public ActionResult Edit(int? id)
         {
-            return View();
+            if (!id.HasValue)
+                return PartialView(new Plataforma());
+            else
+                return PartialView(_plataformaService.GetById((int)id));
         }
 
-        // GET: Plataforma/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Plataforma/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        [HttpPost]        
+        public ActionResult Edit(int id, Plataforma plataforma)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                _plataformaService.InsertOrUpdate(plataforma);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch(Exception e)
             {
-                return View();
+                return PartialView();
             }
         }
-
-        // GET: Plataforma/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Plataforma/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Plataforma/Delete/5
+                   
         public ActionResult Delete(int id)
         {
-            return View();
-        }
-
-        // POST: Plataforma/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
             try
             {
-                // TODO: Add delete logic here
-
+                _plataformaService.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return PartialView();
             }
         }
     }
