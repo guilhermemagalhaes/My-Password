@@ -1,0 +1,7 @@
+/.vs/**
+bin/
+obj/
+MyPassword/bin/
+MyPassword/obj/
+MyPassword.presentation/bin/
+MyPassword.presentation/obj/
