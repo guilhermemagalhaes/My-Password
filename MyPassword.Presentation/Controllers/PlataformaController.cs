@@ -32,10 +32,7 @@ namespace MyPassword.Presentation.Controllers
 
         public ActionResult Edit(int? id)
         {
-            if (!id.HasValue)
-                return PartialView("_EditPartial", new Plataforma());
-            else
-                return PartialView("_EditPartial", _plataformaService.GetById((int)id));
+            return PartialView("_EditPartial", id.HasValue ? _plataformaService.GetById((int)id) : new Plataforma());
         }
 
         [HttpPost]
