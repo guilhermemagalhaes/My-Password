@@ -41,8 +41,7 @@ namespace MyPassword.Presentation
             services.AddTransient<IPlataformaService, PlataformaService>();
             services.AddTransient<ISenhasService, SenhasService>();
             services.AddTransient<IPlataformaRepository, PlataformaRepository>();
-            services.AddTransient<ISenhasRepository, SenhasRepository>();
-
+            services.AddTransient<ISenhasRepository, SenhasRepository>();            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -15,7 +15,7 @@ namespace MyPassword.Presentation.Controllers
 
         public PlataformaController(IPlataformaService plataformaService)
         {
-            _plataformaService = plataformaService;            
+            _plataformaService = plataformaService;
         }
 
 
@@ -33,25 +33,25 @@ namespace MyPassword.Presentation.Controllers
         public ActionResult Edit(int? id)
         {
             if (!id.HasValue)
-                return PartialView(new Plataforma());
+                return PartialView("_EditPartial", new Plataforma());
             else
-                return PartialView(_plataformaService.GetById((int)id));
+                return PartialView("_EditPartial", _plataformaService.GetById((int)id));
         }
 
-        [HttpPost]        
-        public ActionResult Edit(int id, Plataforma plataforma)
+        [HttpPost]
+        public ActionResult Edit(Plataforma plataforma)
         {
             try
             {
                 _plataformaService.InsertOrUpdate(plataforma);
                 return RedirectToAction(nameof(Index));
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return PartialView();
             }
         }
-                   
+
         public ActionResult Delete(int id)
         {
             try
