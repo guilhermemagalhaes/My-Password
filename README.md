@@ -8,11 +8,11 @@ Espero que esse projeto possa te ajudar, assim como me ajudou no aprendizado de 
 
 #Prints
 
-![alt text](prints/1.PNG "Tela")
+![alt text](Prints/1.png "Tela")
 
-![alt text](prints/2.PNG "Tela")
+![alt text](Prints/2.png "Tela")
 
-![alt text](prints/3.PNG "Tela")
+![alt text](Prints/3.png "Tela")
 
 
 
