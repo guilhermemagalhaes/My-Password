@@ -1,0 +1,86 @@
+﻿@model MyPassword.Entity.PlataformaSenha
+
+<form id="frmSenha" method="post">
+    <div class="modal-body">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="Senha.SenhaId" />
+        <div class="form-group">
+            <label asp-for="Senha.PlataformaId" class="control-label"></label>
+            <select asp-for="Senha.PlataformaId" class="form-control" id="ddlPlataforma" asp-items="ViewBag.PlataformaId"></select>
+            <span asp-validation-for="Senha.PlataformaId" class="text-danger"></span>
+        </div>
+        <div id="divPlataforma" style="display: none">
+
+            <div class="form-group">
+                <label asp-for="Plataforma.URL" class="control-label"></label>
+                <input asp-for="Plataforma.URL" class="form-control" required="" />
+                <span asp-validation-for="Plataforma.URL" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Plataforma.Nome" class="control-label"></label>
+                <input asp-for="Plataforma.Nome" class="form-control" required="" />
+                <span asp-validation-for="Plataforma.Nome" class="text-danger"></span>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label asp-for="Senha.Usuario" class="control-label"></label>
+            <input asp-for="Senha.Usuario" class="form-control" required="" />
+            <span asp-validation-for="Senha.Usuario" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Senha.SenhaDesc" class="control-label"></label>
+            <input asp-for="Senha.SenhaDesc" class="form-control" required="" />
+            <span asp-validation-for="Senha.SenhaDesc" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <div class="form-group">
+            <button type="button" value="Salvar" id="btnSalvarSenha" class="btn btn-outline-dark">Salvar</button>
+            &nbsp;
+            <button class="btn btn-outline-secondary" asp-action="Index" data-dismiss="modal">Retornar</button>
+        </div>
+    </div>
+</form>
+
+<script>
+
+    $.validator.unobtrusive.parse("#frmSenha");
+
+    $("#ddlPlataforma").change(function (e) {
+        var value = $(this).val();
+        if (value = "99999") {
+            $("#divPlataforma").show();
+        } else {
+            $("#divPlataforma").hide();
+        }
+    });
+
+    $("#btnSalvarSenha").on("click",function (e) {
+        e.preventDefault();
+
+        var isValid = $("#frmSenha").valid();
+        if (!isValid) {
+            return;
+        }
+
+        $.ajax({
+            url: "@Url.Action("Edit", "Senha")",
+            type: "POST",
+            data: $("#frmSenha").serialize(),
+            success: function (ret, data) {
+                console.log(ret);
+                FecharModal($('#modalSenha'));
+                $("#conteudo").html(ret);
+            },
+            error: function (ret, data) {
+                console.log(ret);
+            }
+        })
+    });
+</script>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

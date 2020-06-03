@@ -11,15 +11,20 @@ namespace MyPassword.Services.Impl
     public class SenhasService : ISenhasService
     {
         private readonly ISenhasRepository _senhasRepository;
+        private readonly IPlataformaService _plataformaService;
 
-        public SenhasService(ISenhasRepository senhasRepository)
+        public SenhasService(ISenhasRepository senhasRepository, IPlataformaService plataformaService)
         {
             _senhasRepository = senhasRepository;
+            _plataformaService = plataformaService;
         }
 
-        public int InsertOrUpdate(Senha senha)
+        public int InsertOrUpdate(PlataformaSenha plataformaSenha)
         {
-            return _senhasRepository.InsertOrUpdate(senha);
+            if(plataformaSenha.Plataforma.Nome != null)
+                plataformaSenha.Senha.PlataformaId = _plataformaService.InsertOrUpdate(plataformaSenha.Plataforma);
+
+            return _senhasRepository.InsertOrUpdate(plataformaSenha.Senha);
         }
 
         public IList<Senha> GetAll()

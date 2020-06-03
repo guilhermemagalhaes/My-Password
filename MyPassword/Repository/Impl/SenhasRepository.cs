@@ -1,5 +1,7 @@
-﻿using MyPassword.Entity;
+﻿using Microsoft.EntityFrameworkCore;
+using MyPassword.Entity;
 using MyPassword.Repository.Contract;
+using MyPassword.Repository.Util;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,7 +27,7 @@ namespace MyPassword.Repository.Impl
 
         public IList<Senha> GetAll()
         {
-            return _context.Senhas.ToList();
+            return _context.Senhas.Include(x => x.Plataforma).ToList();
         }
 
         public Senha GetById(int SenhaId)
@@ -35,7 +37,7 @@ namespace MyPassword.Repository.Impl
 
         public int InsertOrUpdate(Senha senha)
         {
-            var _senha = _context.Senhas.FirstOrDefault(x => x.SenhaId == senha.SenhaId);
+            var _senha = _context.Senhas.InsertOrUpdateOnSubmit(x => x.SenhaId == senha.SenhaId);
 
             if (_senha == null)
                 _senha = new Senha();
@@ -44,8 +46,6 @@ namespace MyPassword.Repository.Impl
             _senha.Usuario = senha.Usuario;
             _senha.SenhaDesc = senha.SenhaDesc;
             _senha.DataCadastro = _senha.SenhaId == 0 ? DateTime.Now : _senha.DataCadastro;
-
-            _context.Add(_senha);
             _context.SaveChanges();
 
             return _senha.SenhaId;

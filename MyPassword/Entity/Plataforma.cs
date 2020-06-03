@@ -11,14 +11,18 @@ namespace MyPassword.Entity
     {
         [Key]
         public int PlataformaId { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "{0} é obrigatória")]
         [MaxLength(255)]
         public string URL { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "{0} é obrigatório")]
         [MaxLength(100)]
         public string Nome { get; set; }
+
         [DisplayName("Data Cadastro")]
         public DateTime DataCadastro { get; set; }
+
         public ICollection<Senha> Senhas { get; set; }
     }
 }

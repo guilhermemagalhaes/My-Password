@@ -11,7 +11,7 @@ namespace MyPassword.Services.Contract
 
         Senha GetById(int SenhaId);
 
-        int InsertOrUpdate(Senha senha);
+        int InsertOrUpdate(PlataformaSenha plataformaSenha);
 
         void Delete(int SenhaId);
     }

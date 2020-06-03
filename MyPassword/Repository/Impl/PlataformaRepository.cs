@@ -41,7 +41,7 @@ namespace MyPassword.Repository.Impl
             _plataforma.URL = plataforma.URL;
             _plataforma.DataCadastro = _plataforma.PlataformaId == 0 ? DateTime.Now : _plataforma.DataCadastro;
             _context.SaveChanges();
-            return plataforma.PlataformaId;
+            return _plataforma.PlataformaId;
         }
     }
 }

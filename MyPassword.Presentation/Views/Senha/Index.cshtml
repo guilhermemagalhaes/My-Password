@@ -1,26 +1,29 @@
-﻿@model IEnumerable<MyPassword.Entity.Plataforma>
+﻿@model IEnumerable<MyPassword.Entity.Senha>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Plataformas</h1>
+<h1>Senhas</h1>
 
 <p>
-    <a class="btn btn-outline-dark" data-toggle="modal" data-target="#modalPlataforma" asp-action="Edit"
-       data-ajax="true" data-ajax-mode="replace" data-ajax-update="#plataforma_partial">Adicionar Plataforma</a>
+    <a class="btn btn-outline-dark" data-toggle="modal" data-target="#modalSenha" asp-action="Edit"
+       data-ajax="true" data-ajax-mode="replace" data-ajax-update="#plataforma_partial">Adicionar Senha</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.URL)
+                @Html.DisplayNameFor(model => model.Usuario)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Nome)
+                @Html.DisplayNameFor(model => model.SenhaDesc)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DataCadastro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Plataforma)
             </th>
             <th></th>
         </tr>
@@ -30,18 +33,21 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.URL)
+                    @Html.DisplayFor(modelItem => item.Usuario)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Nome)
+                    @Html.DisplayFor(modelItem => item.SenhaDesc)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.DataCadastro)
                 </td>
                 <td>
-                    <a class="btn btn-outline-dark" asp-route-id="@item.PlataformaId" data-toggle="modal" data-target="#modalPlataforma" asp-action="Edit"
+                    @Html.DisplayFor(modelItem => item.Plataforma.Nome)
+                </td>
+                <td>
+                    <a class="btn btn-outline-dark" asp-route-id="@item.SenhaId" data-toggle="modal" data-target="#modalSenha" asp-action="Edit"
                        data-ajax="true" data-ajax-mode="replace" data-ajax-update="#plataforma_partial">Editar</a>
-                    <a class="btn btn-outline-dark" asp-action="Delete" asp-route-id="@item.PlataformaId"
+                    <a class="btn btn-outline-dark" asp-action="Delete" asp-route-id="@item.SenhaId"
                        data-ajax="true" data-ajax-mode="replace" data-ajax-update="#conteudo">Excluir</a>
                 </td>
             </tr>
@@ -49,11 +55,11 @@
     </tbody>
 </table>
 
-<div class="modal fade" id="modalPlataforma" tabindex="-1" role="dialog" aria-labelledby="modalPlataforma" aria-hidden="true">
+<div class="modal fade" id="modalSenha" tabindex="-1" role="dialog" aria-labelledby="modalSenha" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Plataforma</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Senhas</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -68,3 +74,5 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+
+

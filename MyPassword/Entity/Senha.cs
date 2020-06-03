@@ -12,19 +12,24 @@ namespace MyPassword.Entity
     {
         [Key]
         public int SenhaId { get; set; }
+
+        [DisplayName("Plataforma")]
         [ForeignKey("Plataforma")]
         public int PlataformaId { get; set; }
-        [Required]
+
+        [Required(ErrorMessage= "{0} é obrigatório")]
         [MaxLength(255)]
+        [DisplayName("E-mail/Usuário")]
         public string Usuario { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "{0} é obrigatório")]
         [MaxLength(255)]
+        [DisplayName("Senha")]
         public string SenhaDesc { get; set; }
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
-        [DefaultValue("GETDATE()")]
+
         [DisplayName("Data Cadastro")]
         public DateTime DataCadastro { get; set; }
-        public Plataforma Plataforma { get; set; }
 
+        public Plataforma Plataforma { get; set; }
     }
 }
